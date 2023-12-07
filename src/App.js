@@ -1,79 +1,66 @@
-
 import './App.css';
-//import Header from './Header';
-import Products_list from './Products_list';
-//import {useState} from 'react'
-
+//import Product from './Product';
+import { useEffect, useState } from 'react';
 function App() {
+  
+  //let [productVisible,setProductVisible] =  useState(false);
+  
+  let [users,setUsers]= useState([]);
 
 
-    //initializing state variable
-    //let [name,setName] = useState();
-    //let [age,setAge] = useState(); 
-    let countries = [
-      {id:1,name: "India",capital:"New Delhi"},
-      {id:2,name: "South africa",capital:"New Cape town"},
-      {id:3,name: "New Zealand",capital:"Wellington"},
-      {id:4,name: "USA",capital:"Washington DC"}
-    ]
 
+
+  useEffect(()=>{
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then((response)=>response.json())
+    .then((data)=>{
+      console.log(data);
+
+      setUsers(data);
+
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+
+  },[])
+  
   return (
-    <div className="App">
-      
-      {
-        countries.map((country,id)=>{
-          return (
-            <div className='data'key={id}>
-              <h3>{country.name}</h3>
-              <p>{country.capital}</p>
-            </div>
-          )
-        })
-      }
-      
-      <Products_list/>
 
-      
-
-
-      {/*<div className='data'>
-        <h3>{countries[0].name}</h3>
-        <p>{countries[0].capital}</p>
-      </div>
-
-      <div className='data'>
-      <h3>{countries[1].name}</h3>
-        <p>{countries[1].capital}</p>
-      </div>
-    */}
-      
-
-      {/*<input type='text' placeholder='Enter Name' onChange={(event)=>{
-      setName(event.target.value)
-      }}/>
-      <input type='number' placeholder='Enter Age' onChange={(event)=>{
-      setAge(event.target.value)
-      }}/>
-
-      <button type='button' onClick={()=>{
-        console.log(name,age)
-      }}>Submit</button>
     
 
+    <div className="App">
+      
+      {/*<h1>Welcome</h1>
 
+      <button onClick={()=>{
+        setProductVisible(true);
+      }}>Show Product</button>
 
-      <Header/>
+      <button onClick={()=>{
+        setProductVisible(false);
+      }}>Hide Product</button>
 
-      <Products_list/>
-  
-
-      {/*<button className='btn' onClick={(event)=>{
-        console.log(event)
-        //doSomething("Raju")
-      }} >Click</button>
+      {
+        productVisible == true ?
+        (
+          <Product/>
+        )
+        :null
+      }
     */}
-      
-      
+
+    {
+      users.map((user)=>{
+        return (
+          <div className='user' key={user.id}>
+            <h1>{user.name}</h1>
+            <p>{user.username}</p>
+            <p>{user.website}</p>
+          </div>
+        )
+      })
+    }
     </div>
   );
 }
