@@ -8,7 +8,7 @@ function App() {
 
 
   useEffect(() => {
-    //Api Key
+    /*Api Key
     fetch(//apikeylink)
 
     .then((response) => response.json())
@@ -21,7 +21,7 @@ function App() {
     })
     },[]);
   
-
+    */
     
   return (
 
