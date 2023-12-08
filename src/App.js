@@ -1,68 +1,60 @@
 import './App.css';
-//import Product from './Product';
-import { useEffect, useState } from 'react';
+import News from './News';
+import  React, {useEffect,useState} from 'react';
 function App() {
+
   
-  //let [productVisible,setProductVisible] =  useState(false);
-  
-  let [users,setUsers]= useState([]);
+  let [articles,setArticles]= useState([]);
 
 
+  useEffect(() => {
+    //Api Key
+    fetch(//apikeylink)
 
-
-  useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then((response)=>response.json())
-    .then((data)=>{
-      console.log(data);
-
-      setUsers(data);
-
+    .then((response) => response.json())
+    .then((news) => {
+      setArticles(news.articles);
+      console.log(news.articles)
     })
-    .catch((err)=>{
+    .catch((err) => {
       console.log(err);
     })
-
-  },[])
+    },[]);
   
-  return (
 
     
+  return (
 
     <div className="App">
-      
-      {/*<h1>Welcome</h1>
+      <header className='header'>
+       
+        <h1>Parso Tak</h1>
 
-      <button onClick={()=>{
-        setProductVisible(true);
-      }}>Show Product</button>
+        <input type='text' placeholder='Search news'/>
 
-      <button onClick={()=>{
-        setProductVisible(false);
-      }}>Hide Product</button>
+      </header>
 
-      {
-        productVisible == true ?
-        (
-          <Product/>
-        )
-        :null
-      }
-    */}
+      <section className='news-articles'>
 
-    {
-      users.map((user)=>{
-        return (
-          <div className='user' key={user.id}>
-            <h1>{user.name}</h1>
-            <p>{user.username}</p>
-            <p>{user.website}</p>
-          </div>
-        )
-      })
-    }
+        {
+          articles.map((article)=>{
+            return(
+              <News article={article}/>
+            )
+          })
+
+        }
+
+
+        
+      </section>
+
     </div>
   );
 }
 
 export default App;
+
+//2f62365eac094de6805ce0018e1d8f02
+//open weathermap// api for weather data
+//nutrition api,pokemon, seach api list github-public api
